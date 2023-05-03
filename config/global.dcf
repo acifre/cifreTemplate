@@ -1,0 +1,15 @@
+data_loading: TRUE
+cache_loading: FALSE
+munging: TRUE
+logging: FALSE
+load_libraries: TRUE
+libraries: psych, Hmisc, ggplot2, readxl, foreign, lme4, lavaan, dplyr, tidyr, rstatix, ggpubr, lmerTest, car
+as_factors: FALSE
+recursive_loading: TRUE
+attach_internal_libraries: FALSE
+data_loading_header: TRUE
+data_ignore:
+logging_level: INFO
+cache_loaded_data: FALSE
+sticky_variables: NONE
+tables_type: data_frame

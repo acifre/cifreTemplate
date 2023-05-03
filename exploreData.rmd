@@ -1,0 +1,42 @@
+---
+title: "Exploring the Data"
+author: "Anthony Cifre"
+date: "`r Sys.Date()`"
+output: 
+    html_document:
+        toc: true
+        number_sections: true
+        toc_float: true
+        theme: cerulean
+        code_folding: hide
+knit: (function(input, ...) {
+    rmarkdown::render(
+      input,
+      output_dir = "./output"
+    )
+  })
+---
+# Initialize Project
+
+```{r adjust_directory_if_needed}
+# Un-comment lines below if rmd file is placed in a subdirectory
+# library(knitr)
+# opts_knit$set(root.dir = normalizePath('../')) 
+```
+
+```{r load_project, warning=FALSE, message=FALSE}
+# 1. Set options in config/global.dcf
+# 2. Load packages listed in config/global.dcf
+# 3. Import functions in lib directory
+# 4. Load data in data directory
+# 5. Run data manipulations in munge directory 
+
+rm(list = ls()) # optionally refresh workspace
+library(ProjectTemplate); load.project()
+```
+
+# Explore
+
+```{r}
+
+```
