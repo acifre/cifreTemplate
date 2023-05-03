@@ -1,8 +1,8 @@
-# AnglimModifiedProjectTemplate (v 0.5.2)
+# CifreModifiedProjectTemplate (v 0.0.1)
 
 ProjectTemplate is an R Package which facilitates data analysis with R. It makes it easy to start a new data analysis project. In short, **ProjectTemplate is awesome and worth learning**.
 
-I have modified the default ProjectTemplate folder structure to align more with my workflow. 
+I have modified the default ProjectTemplate folder structure to align more with my workflow.
 However, I think these tweaks should be useful for others.
 More information is described below.
 
@@ -21,18 +21,18 @@ In addition:
 # Getting Started with a New Data Analysis Project
 If you want to use this workflow for doing data analysis, adopt the following steps:
 
-* [Download a zip file of the AnglimModifiedProjectTemplate](https://github.com/jeromyanglim/AnglimModifiedProjectTemplate/archive/master.zip)
+* [Download a zip file of the AnglimModifiedProjectTemplate](https://github.com/acifre/cifreTemplate)
 * Unzip this file in an appropriate location and give both the directory and the RStudio project file (i.e., `InsertProjectNameHere.Rproj`) a name corresponding to your project
-* Open in Rstudio by clicking the `.Rproj` file (this helps to ensure that the R working directory is correct) 
+* Open in Rstudio by clicking the `.Rproj` file (this helps to ensure that the R working directory is correct)
 * Prepare raw-data (i.e., ensure name of data file is what you want it to be in R) and add to `data` directory
-* Open included RMarkdown file (i.e., `explore.rmd`) and run the chunk `library(ProjectTemplate); load.project()` and check that the data imported correctly (you may well get errors at this point indicating that you need to install additional R packages or dependencies (particularly perl with gdata), if so, install these).
+* Open included RMarkdown file (i.e., `exploreData.rmd`) and run the chunk `library(ProjectTemplate); load.project()` and check that the data imported correctly (you may well get errors at this point indicating that you need to install additional R packages or dependencies (particularly perl with gdata), if so, install these).
 
 You're now ready to start manipulating and analysing your data.
 
 * **Data manipulation:** If you need to modify your imported data, put this code in an r-script in the munge directory (i.e., `munge/01-munge.R`). E.g., add or modify a variables in a data.frame; add or remove cases; merge data frames. More generally, if there are any objects that need to be accessible across multiple analyses, then put them in the munge script.
 * **Additional R Packages:** If you need to use an additional R package, add the name of this package to the `libraries` line in `config/global.dcf` rather than adding `library("packagename")` to your script.
 * **Custom functions:** If you write a function to help you perform your analyses, then place it in an r script in the `lib` directory. This way it will be automatically imported everytime you run `load.project()`
-* **Data analysis**: If you are running analyses that you plan to keep, then place them in an an RMarkdown file (e.g., `explore.rmd`). Make sure that the you have an initial chunk that just has `library(ProjecTemplate); load.project()`. Then add code chunks after that as required. 
+* **Data analysis**: If you are running analyses that you plan to keep, then place them in an an RMarkdown file (e.g., `explore.rmd`). Make sure that the you have an initial chunk that just has `library(ProjecTemplate); load.project()`. Then add code chunks after that as required.
 
 
 # Debugging and General Tips
@@ -40,18 +40,18 @@ You're now ready to start manipulating and analysing your data.
 
 * **What if there is an error in my data manipulation code (i.e., munge files)?** Clear the workspace (i.e., click the broom in Rstudio or run `rm(list=ls())`. Then run `library(ProjectTemplate); load.project(list(munging=FALSE))`. This will load the data, import packages and so on, but wont run the data manipulation code. Then run each line in the data manipulation file until you encounter the error. Then it's just a matter of adopting normal debugging procedures. Make sure the data manipulation file is saved.
 
-* **Returning to an analysis after closing RStudio?** In general, you should just need to open Rstudio using the Rproj file and then run `library(ProjectTemplate); load.project()`. This will automatically load the data, import specified packages, import support functions, and run initial data manipulations manipulations. You should then be able to begin analysis. 
+* **Returning to an analysis after closing RStudio?** In general, you should just need to open Rstudio using the Rproj file and then run `library(ProjectTemplate); load.project()`. This will automatically load the data, import specified packages, import support functions, and run initial data manipulations manipulations. You should then be able to begin analysis.
 
 * **What if RMarkdown code chunks can not find a variable?** This is usually a sign that data manipulation steps have been placed in the RMarkdown file. Try to find these and move them into the munge folder. In general, aim for RMarkdown code chunks to only depend on `load.project()` and not on other code chunks. So in theory, after running `load.project()` you should be able to run any other chunks in any order.
 
-* **General comments about workflow:** 
-For some steps, you have the choice between refreshing the project or adopting a manual step. For example, when importing a package, you can either use `library(...)` or you can add the package to `global.dcf` and run `load.project()`. Similarly if you are creating a new function that you put in the `lib` directory, you can either source it manually or you can run `load.project()`. Either approach is fine. The key is to remember to do the steps required to ensure everything works with ProjectTemplate. A general trick for debugging, is to clear the workspace, and then run `load.project()`. In addition, when exploring the data, you often run analyses that don't need to be saved in your data analysis script.  
+* **General comments about workflow:**
+For some steps, you have the choice between refreshing the project or adopting a manual step. For example, when importing a package, you can either use `library(...)` or you can add the package to `global.dcf` and run `load.project()`. Similarly if you are creating a new function that you put in the `lib` directory, you can either source it manually or you can run `load.project()`. Either approach is fine. The key is to remember to do the steps required to ensure everything works with ProjectTemplate. A general trick for debugging, is to clear the workspace, and then run `load.project()`. In addition, when exploring the data, you often run analyses that don't need to be saved in your data analysis script.
 
-* **Saving figures and tables**: When conducting reproducible data analysis a writing a mansucript, you can use a document format that allows for weaving results and formatted text (e.g., RMarkdown or LaTeX using either knitr or Sweave). An alternative is to make the process of generating tables, figures, and text fully reproducible by a script, but then manually import this into your document. While weaving formats are more reproducible, they can result in practical problems. In particular, I'm tyipcally collaborating with people who use Microsoft Word. Furthermore, it can be nice to know that the figures and tables are fixed and wont accidentally change without your knowledge. And some steps like detailed table formatting, can be quite complicated to automate. If you adopt this semi-automated process, then it's useful to export the figures to the `output` directory (e.g., http://www.statmethods.net/graphs/creating.html). Tables can also be exported to the output directory (e.g., using `write.csv(mytable, file = "output/mytable.csv")` where it can have manual formatting applied (e.g., lines, centering, fonts, etc.). 
+* **Saving figures and tables**: When conducting reproducible data analysis a writing a mansucript, you can use a document format that allows for weaving results and formatted text (e.g., RMarkdown or LaTeX using either knitr or Sweave). An alternative is to make the process of generating tables, figures, and text fully reproducible by a script, but then manually import this into your document. While weaving formats are more reproducible, they can result in practical problems. In particular, I'm tyipcally collaborating with people who use Microsoft Word. Furthermore, it can be nice to know that the figures and tables are fixed and wont accidentally change without your knowledge. And some steps like detailed table formatting, can be quite complicated to automate. If you adopt this semi-automated process, then it's useful to export the figures to the `output` directory (e.g., http://www.statmethods.net/graphs/creating.html). Tables can also be exported to the output directory (e.g., using `write.csv(mytable, file = "output/mytable.csv")` where it can have manual formatting applied (e.g., lines, centering, fonts, etc.).
 
 
 # Tutorials:
-* An [general explanation on using this customised ProjectTemplate](http://jeromyanglim.blogspot.com.au/2014/05/customising-projecttemplate-in-r.html). Note that it was written with version 0.1. A few things have changed since then. 
+* An [general explanation on using this customised ProjectTemplate](http://jeromyanglim.blogspot.com.au/2014/05/customising-projecttemplate-in-r.html). Note that it was written with version 0.1. A few things have changed since then.
 * The general ProjectTemplate website includes more general information about [ProjectTemplate](http://projecttemplate.net) and [here is a video providing an introduction to ProjectTemplate more generally](https://www.youtube.com/watch?v=I9YNIi-QmR0)
 
 
@@ -69,7 +69,7 @@ v. 0.6
 * Migrated project to make global.dcf consistent with version 0.9 of ProjectTemplate
 * Default is data_frame
 * Removed "data/input.xls"; it seemed to be distracting new users
-* Hide code that deals with overriding tibble conversion now that their an option to 
+* Hide code that deals with overriding tibble conversion now that their an option to
   to use data frames.
 
 v. 0.5.2
@@ -93,9 +93,9 @@ v. 0.5
 * Added file `lib/importxls.r`. It reads my two default xls files in the data directory using the `readxl` package rather than `gdata`. `readxl` has the advantage that it does not have an external dependency on perl.
 
 
-v. 0.4 
+v. 0.4
 
-* Added `raw-data` directory as a standardised location for converting raw data into data suitable for the data directory (i.e., convert original file names to those suitable for data directory; 
+* Added `raw-data` directory as a standardised location for converting raw data into data suitable for the data directory (i.e., convert original file names to those suitable for data directory;
 * Updated `config/global.dcf` to reflect updates to ProjectTemplate (v 0.6)
 
 
@@ -109,5 +109,4 @@ v. 0.1
 * Added `output/output-processing.xlsx` for manually preparing tables from exported data
 * Added `data/meta.xls` as general file for storing meta data (e.g., scoring rules for psychological tests)
 * Added `data/input.xls` a simple general purpose spreadsheet for storing ad hoc data that needs to be imported into R
-# cifreTemplate
-# cifreTemplate
+
